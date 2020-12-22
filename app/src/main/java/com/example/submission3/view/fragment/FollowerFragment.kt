@@ -40,9 +40,10 @@ class FollowerFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_follower, container, false)
 
+        receiveData = arguments?.getString("sendData")
+
         setViewModel()
         return root
-
     }
 
     private fun setViewModel() {
