@@ -1,21 +1,21 @@
-package com.example.submission3.view
+package com.example.submission3.view.activity
 
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.submission3.viewModel.MainViewModel
 import com.example.submission3.R
 import com.example.submission3.adapter.UserAdapter
 import com.example.submission3.model.User
+import com.example.submission3.viewModel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -91,8 +91,10 @@ class MainActivity : AppCompatActivity() {
     private fun showLoading(sl: Boolean) {
         if (sl) {
             progress_search.visibility = View.VISIBLE
+            tv_search.visibility = View.VISIBLE
         } else {
             progress_search.visibility = View.GONE
+            tv_search.visibility = View.GONE
         }
     }
 
