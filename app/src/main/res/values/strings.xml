@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Submission3</string>
+    <string name="username">Username</string>
+    <string name="username_not_found">Username Not Found!</string>
+    <string name="hint_search">Search User</string>
+    <string name="github_users_app">Github Users App</string>
+    <string name="juanda_esa_putra">Juanda Esa Putra</string>
+    <string name="company" />
+    <string name="location" />
+    <string name="_10">10</string>
+    <string name="repository">Repository</string>
+    <string name="_15">15</string>
+    <string name="followers">Followers</string>
+    <string name="_20">20</string>
+    <string name="following">Following</string>
+    <string name="fab">FAB</string>
+</resources>
