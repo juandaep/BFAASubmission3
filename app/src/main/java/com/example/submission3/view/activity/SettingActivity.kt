@@ -10,7 +10,7 @@ import com.example.submission3.service.AlarmService
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_setting.*
 
-class SettingActivity : AppCompatActivity(), View.OnClickListener {
+class SettingActivity : AppCompatActivity() {
 
     private lateinit var alarmReminder: AlarmService
     private lateinit var alarmPreference: AlarmPreference
@@ -43,14 +43,5 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        test_notif.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View) {
-        when (v.id) {
-            R.id.test_notif -> {
-                alarmReminder.onReceive(this, intent)
-            }
-        }
     }
 }
