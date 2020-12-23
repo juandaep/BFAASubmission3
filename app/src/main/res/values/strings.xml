@@ -19,4 +19,12 @@
     <string name="no_follower">You Have No Followers</string>
     <string name="no_following">You Have No Following</string>
     <string name="please_search_user">Please Search User</string>
+    <string name="favorite">Favorite</string>
+    <string name="reminder">Reminder</string>
+    <string name="change_language">Change Language</string>
+    <string name="daily_reminder">Daily Reminder</string>
+    <string name="daily_reminder_message">Open app and search the user :)</string>
+    <string name="reminder_info">This app will be remind you every 9AM</string>
+    <string name="switch_on">Reminder On</string>
+    <string name="switch_off">Reminder Off</string>
 </resources>
