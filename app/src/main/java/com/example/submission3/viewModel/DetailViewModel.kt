@@ -35,7 +35,13 @@ class DetailViewModel : ViewModel() {
                     detailUser.username = responseObject.getString("login")
                     detailUser.avatar = responseObject.getString("avatar_url")
                     detailUser.company_detail = responseObject.getString("company")
+                    if (detailUser.company_detail == "null") detailUser.company_detail =
+                        " -" else detailUser.company_detail =
+                        detailUser.company_detail
                     detailUser.location_detail = responseObject.getString("location")
+                    if (detailUser.location_detail == "null") detailUser.location_detail =
+                        " -" else detailUser.location_detail =
+                        detailUser.company_detail
                     detailUser.repository_detail = responseObject.getInt("public_repos")
                     detailUser.followers_detail = responseObject.getInt("followers")
                     detailUser.following_detail = responseObject.getInt("following")

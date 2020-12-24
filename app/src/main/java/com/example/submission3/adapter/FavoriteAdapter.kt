@@ -4,13 +4,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.submission3.R
 import com.example.submission3.model.User
 import com.example.submission3.view.activity.DetailActivity
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.list_user.view.*
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
@@ -46,7 +44,6 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
                     intent.putExtra(DetailActivity.EXTRA_FAVORITE, "UserFavorite")
                     context.startActivity(intent)
                 }
-                Toast.makeText(context, user.username, Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:text="@string/no_following"
         android:textStyle="bold"
+        android:layout_marginTop="16dp"
         android:textAlignment="center"
         android:textSize="20sp"
         android:visibility="gone"/>

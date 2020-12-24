@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar?.title = "Github User App"
+
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
 

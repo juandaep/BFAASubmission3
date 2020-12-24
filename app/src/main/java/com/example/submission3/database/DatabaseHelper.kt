@@ -17,7 +17,7 @@ internal class DatabaseHelper(context: Context) :
 
             private const val SQL_CREATE_TABLE_FAVORITE = "CREATE TABLE $TABLE_NAME" +
                     "(${ID} INTEGER PRIMARY KEY," +
-                    "$USERNAME TEXT NOT NULL," +
+                    "$USERNAME TEXT NOT NULL UNIQUE," +
                     "$AVATAR TEXT_NOT_NULL)"
         }
 

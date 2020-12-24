@@ -3,6 +3,11 @@
     package="com.example.submission3">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <permission android:name="com.example.submission3.WRITE_DATABASE" android:protectionLevel="normal"/>
+    <permission android:name="com.example.submission3.READ_DATABASE" android:protectionLevel="normal"/>
 
     <application
         android:allowBackup="true"
@@ -11,11 +16,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Submission3">
-        <activity android:name=".view.activity.SettingActivity"></activity>
-        <activity android:name=".view.activity.FavoriteActivity" />
+        <provider
+            android:name=".provider.FavoriteProvider"
+            android:authorities="com.example.submission3"
+            android:enabled="true"
+            android:exported="true"
+            android:writePermission="com.example.submission3.WRITE_DATABASE"
+            android:readPermission="com.example.submission3.READ_DATABASE"/>
+
+        <activity android:name=".view.activity.SettingActivity" />
+
+        <activity android:name=".view.activity.FavoriteActivity"
+            android:parentActivityName=".view.activity.MainActivity"/>
+
         <activity
             android:name=".view.activity.DetailActivity"
             android:parentActivityName=".view.activity.MainActivity" />
+
         <activity android:name=".view.activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +40,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".view.activity.MainActivity" />
+
+        <receiver
+            android:name=".service.AlarmService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="com.example.submission3"/>
     </application>
 
 </manifest>

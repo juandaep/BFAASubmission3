@@ -1,8 +1,7 @@
 package com.example.submission3.view.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.submission3.R
 import com.example.submission3.adapter.FavoriteAdapter
@@ -27,7 +26,6 @@ class FavoriteActivity : AppCompatActivity() {
 
         loadFavoriteAsync()
         showFavoriteRecyclerView()
-        showLoading(true)
     }
 
     private fun loadFavoriteAsync() {
@@ -38,10 +36,8 @@ class FavoriteActivity : AppCompatActivity() {
             }
             val favorite = deferredFavorite.await()
             if (favorite.size > 0) {
-                showLoading(true)
                 adapter.favoriteList = favorite
             } else {
-                showLoading(false)
                 adapter.favoriteList = ArrayList()
                 Snackbar.make(activity_favorite, R.string.no_favorite, Snackbar.LENGTH_SHORT).show()
             }
@@ -52,13 +48,5 @@ class FavoriteActivity : AppCompatActivity() {
         adapter = FavoriteAdapter()
         rv_favorite.adapter = adapter
         rv_favorite.layoutManager = LinearLayoutManager(this)
-    }
-
-    private fun showLoading(sl : Boolean) {
-        if (sl) {
-            progress_favorite.visibility = View.VISIBLE
-        } else {
-            progress_favorite.visibility = View.GONE
-        }
     }
 }
