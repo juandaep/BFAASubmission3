@@ -26,20 +26,20 @@ class AlarmService: BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val title = context.getString(R.string.daily_reminder)
         val message = context.getString(R.string.daily_reminder_message)
-        val alarSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val notificationIntent = Intent(context, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent,0)
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setContentTitle(pendingIntent.toString())
-            .setSmallIcon(R.drawable.github)
-            .setContentTitle(title)
-            .setContentText(message)
-            .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
-            .setSound(alarSound)
-            .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.github)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
+                .setSound(alarmSound)
+                .setAutoCancel(true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
@@ -81,8 +81,7 @@ class AlarmService: BroadcastReceiver() {
 
     fun setAlarm(context: Context): Boolean {
         val intent = Intent(context, AlarmService::class.java)
-        val pendingIntent =
-            PendingIntent.getBroadcast(context, REQUEST_CODE, intent, PendingIntent.FLAG_NO_CREATE)
+        val pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE, intent, PendingIntent.FLAG_NO_CREATE)
         return pendingIntent != null
     }
 }
