@@ -16,6 +16,7 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_DETAIL = "extra_detail"
+        const val EXTRA_FAVORITE = "extra_favorite"
     }
 
     private lateinit var detailViewModel: DetailViewModel
