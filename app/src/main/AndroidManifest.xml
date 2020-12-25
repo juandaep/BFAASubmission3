@@ -41,7 +41,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.activity.MainActivity" />
+        <activity android:name=".view.activity.MainActivity"
+            android:launchMode="singleTop"/>
 
         <receiver
             android:name=".service.AlarmService"

@@ -11,13 +11,14 @@ import com.example.submission3.database.DatabaseContract.FavoriteColumns.Compani
 
 internal class DatabaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+
         companion object {
             private const val DATABASE_NAME = "db_favorite"
             private const val DATABASE_VERSION = 1
 
             private const val SQL_CREATE_TABLE_FAVORITE = "CREATE TABLE $TABLE_NAME" +
                     "(${ID} INTEGER PRIMARY KEY," +
-                    "$USERNAME TEXT NOT NULL UNIQUE," +
+                    "$USERNAME TEXT NOT NULL," +
                     "$AVATAR TEXT_NOT_NULL)"
         }
 

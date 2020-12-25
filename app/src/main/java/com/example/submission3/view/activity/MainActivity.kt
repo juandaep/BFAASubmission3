@@ -89,6 +89,7 @@ class MainActivity : AppCompatActivity() {
     private fun showSelectedUser(user: User) {
         val toDetailActivity = Intent(this@MainActivity, DetailActivity::class.java)
         toDetailActivity.putExtra(DetailActivity.EXTRA_DETAIL, user)
+        toDetailActivity.putExtra(DetailActivity.EXTRA_FAVORITE, "favorite")
         startActivity(toDetailActivity)
     }
 

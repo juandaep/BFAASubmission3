@@ -27,10 +27,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private lateinit var detailViewModel: DetailViewModel
- //   private lateinit var userDetail: User
     private lateinit var uriWithId: Uri
     private var favorite = false
-    private var userItem: User? = null
+    private var userDetail: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,15 +37,15 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
         supportActionBar?.title = "User Detail"
 
-        userItem = intent.getParcelableExtra<User>(EXTRA_DETAIL) as User
+        userDetail = intent.getParcelableExtra<User>(EXTRA_DETAIL) as User
 
-        uriWithId = Uri.parse(CONTENT_URI.toString() + "/" + userItem?.id)
+        uriWithId = Uri.parse(CONTENT_URI.toString() + "/" + userDetail?.id)
 
         setViewModel()
         showLoading(true)
 
         val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager)
-        sectionPagerAdapter.setData(userItem?.username)
+        sectionPagerAdapter.setData(userDetail?.username)
         view_pager.adapter = sectionPagerAdapter
         tab_layout.setupWithViewPager(view_pager)
 
@@ -59,7 +58,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(DetailViewModel::class.java)
-        detailViewModel.setDetailUser(userItem?.username)
+        detailViewModel.setDetailUser(userDetail?.username)
         detailViewModel.getDetailData().observe(this, Observer { userData ->
             if (userData != null) {
                 Glide.with(this)
@@ -84,7 +83,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         val dataFavorite = contentResolver?.query(uriWithId, null, null, null, null)
         val dataObject  = MappingHelper.mapCursorToArrayList(dataFavorite)
         for (data in dataObject) {
-            if (this.userItem?.username == data.username) {
+            if (this.userDetail?.username == data.username) {
                 fab_favorite.setImageResource(R.drawable.ic_favorite_fill)
                 favorite = true
             }
@@ -100,20 +99,22 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun sendFavorite() {
         if (favorite) {
-            userItem.let {
+            userDetail.let {
                 contentResolver.delete(uriWithId, null, null)
                 fab_favorite.setImageResource(R.drawable.ic_favorite_border)
-                Snackbar.make(detail_activity, userItem?.username + " " + this.getString(R.string.remove_from_favorite), Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(detail_activity, userDetail?.username + " " + this.getString(R.string.remove_from_favorite), Snackbar.LENGTH_SHORT).show()
                 favorite = false
             }
         } else {
             val values = ContentValues()
-            values.put(USERNAME, userItem?.username)
-            values.put(AVATAR, userItem?.avatar)
+            values.put(USERNAME, userDetail?.username)
+            values.put(AVATAR, userDetail?.avatar)
             contentResolver.insert(CONTENT_URI, values)
-            userItem?.username
+
+            userDetail?.username
+
             fab_favorite.setImageResource(R.drawable.ic_favorite_fill)
-            Snackbar.make(detail_activity, userItem?.username + " " + this.getString(R.string.add_to_favorite), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(detail_activity, userDetail?.username + " " + this.getString(R.string.add_to_favorite), Snackbar.LENGTH_SHORT).show()
             favorite = true
         }
     }
