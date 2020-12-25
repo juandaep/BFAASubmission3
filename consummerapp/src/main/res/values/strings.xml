@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">consummerapp</string>
+    <string name="username">Username</string>
+    <string name="username_not_found">Username Not Found!</string>
+    <string name="hint_search">Search User</string>
+    <string name="github_users_app">Github Users App</string>
+    <string name="juanda_esa_putra">Juanda Esa Putra</string>
+    <string name="company" />
+    <string name="location" />
+    <string name="_10">10</string>
+    <string name="repository">Repository</string>
+    <string name="_15">15</string>
+    <string name="followers">Followers</string>
+    <string name="_20">20</string>
+    <string name="following">Following</string>
+    <string name="fab">FAB</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_follower">You Have No Followers</string>
+    <string name="no_following">You Have No Following</string>
+    <string name="please_search_user">Please Search User</string>
+    <string name="favorite">Favorite</string>
+    <string name="reminder">Reminder</string>
+    <string name="change_language">Change Language</string>
+    <string name="daily_reminder">Daily Reminder</string>
+    <string name="daily_reminder_message">Open app and search the user :)</string>
+    <string name="reminder_info">This app will be remind you every 9AM</string>
+    <string name="switch_on">Reminder On</string>
+    <string name="switch_off">Reminder Off</string>
+    <string name="no_favorite">No User Favorite Data</string>
+    <string name="remove_from_favorite">Remove from favorite</string>
+    <string name="add_to_favorite">Add to favorite</string>
+</resources>
