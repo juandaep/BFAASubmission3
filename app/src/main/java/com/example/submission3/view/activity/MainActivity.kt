@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar?.title = "Github User App"
+
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
 
@@ -50,7 +52,6 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-
     }
 
     private fun getDataFromGithubApi(user: String) {
@@ -88,6 +89,7 @@ class MainActivity : AppCompatActivity() {
     private fun showSelectedUser(user: User) {
         val toDetailActivity = Intent(this@MainActivity, DetailActivity::class.java)
         toDetailActivity.putExtra(DetailActivity.EXTRA_DETAIL, user)
+        toDetailActivity.putExtra(DetailActivity.EXTRA_FAVORITE, "favorite")
         startActivity(toDetailActivity)
     }
 
@@ -111,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }

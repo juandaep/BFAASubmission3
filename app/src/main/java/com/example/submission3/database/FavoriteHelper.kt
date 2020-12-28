@@ -9,16 +9,17 @@ import com.example.submission3.database.DatabaseContract.FavoriteColumns.Compani
 import java.sql.SQLException
 
 class FavoriteHelper(context: Context) {
+
     companion object {
         private const val DATABASE_TABLE = TABLE_NAME
-        private lateinit var databaseHelper: DatabaseHelper
         private val INSTANCE: FavoriteHelper? = null
         fun getInstance(context: Context): FavoriteHelper = INSTANCE ?: synchronized(this) {
             INSTANCE ?: FavoriteHelper(context)
         }
-
-        private lateinit var  db: SQLiteDatabase
     }
+
+    private var databaseHelper: DatabaseHelper = DatabaseHelper(context)
+    private lateinit var  db: SQLiteDatabase
 
     init {
         databaseHelper = DatabaseHelper(context)
@@ -51,7 +52,7 @@ class FavoriteHelper(context: Context) {
     }
 
     fun deleteById(id: String): Int {
-        return db.delete(DATABASE_TABLE, "$ID = '$id", null)
+        return db.delete(DATABASE_TABLE, "$ID = '$id'", null)
     }
 
 

@@ -13,7 +13,6 @@ object DatabaseContract {
             const val ID = "_id"
             const val USERNAME = "username"
             const val AVATAR = "avatar"
-            const val FAVORITE = "favorite"
 
             val CONTENT_URI : Uri = Uri.Builder().scheme(SCHEME)
                 .authority(AUTHORITY)

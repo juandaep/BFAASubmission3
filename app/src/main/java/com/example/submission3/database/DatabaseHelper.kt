@@ -11,6 +11,7 @@ import com.example.submission3.database.DatabaseContract.FavoriteColumns.Compani
 
 internal class DatabaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+
         companion object {
             private const val DATABASE_NAME = "db_favorite"
             private const val DATABASE_VERSION = 1

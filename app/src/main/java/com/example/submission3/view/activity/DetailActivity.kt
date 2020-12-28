@@ -1,5 +1,7 @@
 package com.example.submission3.view.activity
 
+import android.content.ContentValues
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,18 +10,26 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.submission3.R
 import com.example.submission3.adapter.SectionPagerAdapter
+import com.example.submission3.database.DatabaseContract.FavoriteColumns.Companion.AVATAR
+import com.example.submission3.database.DatabaseContract.FavoriteColumns.Companion.CONTENT_URI
+import com.example.submission3.database.DatabaseContract.FavoriteColumns.Companion.USERNAME
+import com.example.submission3.helper.MappingHelper
 import com.example.submission3.model.User
 import com.example.submission3.viewModel.DetailViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_detail.*
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
         const val EXTRA_DETAIL = "extra_detail"
+        const val EXTRA_FAVORITE = "extra_favorite"
     }
 
     private lateinit var detailViewModel: DetailViewModel
-    private lateinit var userDetail: User
+    private lateinit var uriWithId: Uri
+    private var favorite = false
+    private var userDetail: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +39,18 @@ class DetailActivity : AppCompatActivity() {
 
         userDetail = intent.getParcelableExtra<User>(EXTRA_DETAIL) as User
 
+        uriWithId = Uri.parse(CONTENT_URI.toString() + "/" + userDetail?.id)
+
         setViewModel()
         showLoading(true)
 
         val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager)
-        sectionPagerAdapter.setData(userDetail.username)
+        sectionPagerAdapter.setData(userDetail?.username)
         view_pager.adapter = sectionPagerAdapter
         tab_layout.setupWithViewPager(view_pager)
 
+        setFavoriteData()
+        fab_favorite.setOnClickListener(this)
     }
 
     private fun setViewModel() {
@@ -44,7 +58,7 @@ class DetailActivity : AppCompatActivity() {
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(DetailViewModel::class.java)
-        detailViewModel.setDetailUser(userDetail.username)
+        detailViewModel.setDetailUser(userDetail?.username)
         detailViewModel.getDetailData().observe(this, Observer { userData ->
             if (userData != null) {
                 Glide.with(this)
@@ -63,6 +77,46 @@ class DetailActivity : AppCompatActivity() {
             showLoading(false)
         })
 
+    }
+
+    private fun setFavoriteData() {
+        val dataFavorite = contentResolver?.query(uriWithId, null, null, null, null)
+        val dataObject  = MappingHelper.mapCursorToArrayList(dataFavorite)
+        for (data in dataObject) {
+            if (this.userDetail?.username == data.username) {
+                fab_favorite.setImageResource(R.drawable.ic_favorite_fill)
+                favorite = true
+            }
+        }
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.fab_favorite ->
+                sendFavorite()
+        }
+    }
+
+    private fun sendFavorite() {
+        if (favorite) {
+            userDetail.let {
+                contentResolver.delete(uriWithId, null, null)
+                fab_favorite.setImageResource(R.drawable.ic_favorite_border)
+                Snackbar.make(detail_activity, userDetail?.username + " " + this.getString(R.string.remove_from_favorite), Snackbar.LENGTH_SHORT).show()
+                favorite = false
+            }
+        } else {
+            val values = ContentValues()
+            values.put(USERNAME, userDetail?.username)
+            values.put(AVATAR, userDetail?.avatar)
+            contentResolver.insert(CONTENT_URI, values)
+
+            userDetail?.username
+
+            fab_favorite.setImageResource(R.drawable.ic_favorite_fill)
+            Snackbar.make(detail_activity, userDetail?.username + " " + this.getString(R.string.add_to_favorite), Snackbar.LENGTH_SHORT).show()
+            favorite = true
+        }
     }
 
     private fun showLoading(sl: Boolean) {
