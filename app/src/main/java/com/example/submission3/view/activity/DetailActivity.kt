@@ -12,6 +12,7 @@ import com.example.submission3.R
 import com.example.submission3.adapter.SectionPagerAdapter
 import com.example.submission3.database.DatabaseContract.FavoriteColumns.Companion.AVATAR
 import com.example.submission3.database.DatabaseContract.FavoriteColumns.Companion.CONTENT_URI
+import com.example.submission3.database.DatabaseContract.FavoriteColumns.Companion.ID
 import com.example.submission3.database.DatabaseContract.FavoriteColumns.Companion.USERNAME
 import com.example.submission3.helper.MappingHelper
 import com.example.submission3.model.User
@@ -107,6 +108,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             }
         } else {
             val values = ContentValues()
+            values.put(ID, userDetail?.id)
             values.put(USERNAME, userDetail?.username)
             values.put(AVATAR, userDetail?.avatar)
             contentResolver.insert(CONTENT_URI, values)
